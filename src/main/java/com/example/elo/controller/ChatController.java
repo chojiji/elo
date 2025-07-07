@@ -2,6 +2,7 @@ package com.example.elo.controller;
 
 import com.example.elo.DTO.VotePayload;
 import com.example.elo.Room.ChatRoom;
+import com.example.elo.exception.InvalidRoomConfigException;
 import com.example.elo.message.BaseMessage;
 import com.example.elo.message.ChatMessage;
 import com.example.elo.message.ConfigMessage;
@@ -74,10 +75,9 @@ public class ChatController {
         chatRoomManager.startGame(roomID,userID);
     }
 
-    @MessageMapping("/currentUser")
-    public List<String> getCurrentUser(){
-        return null;
-
-
+    @MessageExceptionHandler(InvalidRoomConfigException.class)
+    @SendToUser("/queue/errors")
+    public String handleInvalidRoomConfigException(InvalidRoomConfigException ex) {
+        return ex.getMessage();
     }
 }

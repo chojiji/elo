@@ -36,21 +36,6 @@ public class StompConfig implements WebSocketMessageBrokerConfigurer {
     private CustomInterceptor customInterceptor;
 
 
-
-
-    /*@Bean(name = "simpleBrokerMessageHandler")
-    public CustomSimpleBrokerHandler customSimpleBrokerMessageHandler(
-            SubscribableChannel clientInboundChannel,
-            MessageChannel clientOutboundChannel,
-            SubscribableChannel brokerChannel) {
-        CustomSimpleBrokerHandler handler = new CustomSimpleBrokerHandler(
-                clientInboundChannel, clientOutboundChannel, brokerChannel, List.of("/chat"));
-
-        handler.setTaskScheduler(new ConcurrentTaskScheduler());
-        handler.setHeartbeatValue(new long[]{20000, 20000});
-        return handler;
-    }*/
-
     @Autowired
     public StompConfig( SocketHandshakeInterceptor socketHandshakeInterceptor,CustomInterceptor customInterceptor) {
         this.socketHandshakeInterceptor=socketHandshakeInterceptor;

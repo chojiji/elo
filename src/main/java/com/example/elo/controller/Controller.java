@@ -51,10 +51,11 @@ public class Controller {
     public ResponseEntity<GroupChatInfo> getGroupChatInfo(String groupName){
         //현재 그룹에서 생성된 채팅방들과 소주제들의 기본정보 제공
         List<ChatRoomBaseConfig> chatRoomBaseConfigList = chatRoomManager.getRoomBaseConfig(chatRoomManager.getRoomsByGroupName(groupName));
-        List<CategoryDataNum> categoryDataNum = categoryService.getCategoryDataNum(groupName);
-        GroupChatInfo groupChatInfo = new GroupChatInfo(chatRoomBaseConfigList,categoryDataNum);
+        List<CategoryDataNum> categoryDataNumList = categoryService.getCategoryDataNum(groupName);
+        GroupChatInfo groupChatInfo = new GroupChatInfo(chatRoomBaseConfigList,categoryDataNumList);
         return ResponseEntity.ok(groupChatInfo);
     }
+
     @GetMapping("/room/category")
     public ResponseEntity<List<ChatRoomBaseConfig>> getCategoryChatInfo(String groupName,String categoryName){
         //현재 그룹의 소주제에 해당하는 채팅방들 제공
@@ -90,11 +91,5 @@ public class Controller {
         return ResponseEntity.ok()
                 .header(HttpHeaders.SET_COOKIE, cookie.toString())
                 .body("쿠키가 생성되었습니다.");
-    }
-
-
-    @ExceptionHandler(IOException.class)
-    public ResponseEntity<String> handleDataNotFoundException(IOException e) {
-        return ResponseEntity.status(500).body(e.getMessage());
     }
 }

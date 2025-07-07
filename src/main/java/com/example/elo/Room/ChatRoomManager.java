@@ -89,17 +89,18 @@ public class ChatRoomManager {
                 .flatMap(List::stream)
                 .collect(Collectors.toList());
     }
-    public List<ChatRoomBaseConfig> getRoomBaseConfig(List<ChatRoom> chatRooms){
+    public List<ChatRoomBaseConfig> getRoomBaseConfig(List<ChatRoom> chatRooms) {
         List<ChatRoomBaseConfig> roomBaseConfigs = new ArrayList<>();
         for (ChatRoom chatRoom : chatRooms) {
-            ChatRoomBaseConfig baseConfig = new ChatRoomBaseConfig();
-            baseConfig.setRoomName(chatRoom.getRoomName());
-            baseConfig.setCategoryName(chatRoom.getTopic());
-            baseConfig.setIsPassword(chatRoom.getPassword() !="");
-            baseConfig.setRoomID(chatRoom.getRoomID());
-            baseConfig.setMaxUserNum(chatRoom.getMaxUser());
-            baseConfig.setCurrentUserNum(chatRoom.getUserNumber());
-            baseConfig.setTime(chatRoom.getTimeLimit());
+            ChatRoomBaseConfig baseConfig = new ChatRoomBaseConfig(
+                    chatRoom.getRoomID(),
+                    chatRoom.getRoomName(),
+                    chatRoom.getTopic(),
+                    !chatRoom.getPassword().isEmpty(),
+                    chatRoom.getUserNumber(),
+                    chatRoom.getMaxUser(),
+                    chatRoom.getTimeLimit()
+            );
             roomBaseConfigs.add(baseConfig);
         }
         return roomBaseConfigs;

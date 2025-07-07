@@ -41,7 +41,7 @@ public class MessageSender {
     }
     public void broadcastResult(String roomID, Deque<String> images,List<Object[]> result){
         String destination = "/chat/" + roomID;
-        ResultMessage resultMessage = new ResultMessage(new ArrayList<>(images), result); // 이미지 Deque를 List로 변환
+        ResultMessage resultMessage = new ResultMessage(new ArrayList<>(images), result);
         simpMessagingTemplate.convertAndSend(destination, resultMessage);
     }
 }
