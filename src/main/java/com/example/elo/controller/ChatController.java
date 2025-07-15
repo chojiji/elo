@@ -1,25 +1,16 @@
 package com.example.elo.controller;
 
 import com.example.elo.DTO.VotePayload;
-import com.example.elo.Room.ChatRoom;
 import com.example.elo.exception.InvalidRoomConfigException;
 import com.example.elo.message.BaseMessage;
 import com.example.elo.message.ChatMessage;
-import com.example.elo.message.ConfigMessage;
 import com.example.elo.message.EventMessage;
 import com.example.elo.Room.ChatRoomManager;
-import com.example.elo.websocket.CustomPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.*;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.messaging.simp.annotation.SubscribeMapping;
-import org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry;
-import org.springframework.messaging.simp.user.SimpUser;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.socket.WebSocketSession;
 
 import java.security.Principal;
 import java.util.List;
